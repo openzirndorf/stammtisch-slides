@@ -3,14 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenZirndorf — Erster Stammtisch</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
-
+  <title>OpenZirndorf — Stammtisch-Slides</title>
   <style>
-    /* ───────────────────────────────────────────────────────
-       Design-Token  (identisch mit openzirndorf.de)
-    ─────────────────────────────────────────────────────── */
     :root {
       --bg:        #f4f3ef;
       --panel:     #fffdf8;
@@ -20,802 +14,272 @@
       --primary-d: #2f5c0e;
       --accent:    #e1692c;
       --line:      #d8d3c5;
-      --r:         10px;
+      --r:         12px;
     }
 
-    /* ───────────────────────────────────────────────────────
-       Reveal base
-    ─────────────────────────────────────────────────────── */
-    .reveal {
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
       font-family: "Avenir Next", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
-      font-size: 26px;
-      font-weight: 500;
       background: var(--bg);
       color: var(--ink);
-    }
-    .reveal h1, .reveal h2, .reveal h3 {
-      font-family: "Avenir Next", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
-      font-weight: 800;
-      text-transform: none;
-      letter-spacing: -0.025em;
-      color: var(--ink);
-    }
-    .reveal .slides section {
-      text-align: left;
-      padding: 0;
-      height: 100%;
-    }
-    .reveal .progress  { color: var(--primary); height: 3px; }
-    .reveal .controls  { color: var(--primary); }
-    .reveal .slide-number {
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 0.65em;
-      color: var(--muted);
+      min-height: 100vh;
     }
 
-    /* ───────────────────────────────────────────────────────
-       SLIDE TYPES
-    ─────────────────────────────────────────────────────── */
-
-    /* — Titel-Slide — */
-    .s-title {
-      background:
-        radial-gradient(ellipse 50% 50% at 5%  95%, rgba(79,143,23,.15) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 95%  5%,  rgba(225,105,44,.10) 0%, transparent 55%),
-        var(--panel) !important;
-      color: var(--ink) !important;
-      display: flex !important;
-      flex-direction: column;
-      align-items: stretch;
-      text-align: center !important;
-      overflow: hidden;
-    }
-    .s-title .topbar {
+    /* Topbar */
+    .topbar {
       height: 5px;
-      flex-shrink: 0;
       background: linear-gradient(90deg, var(--primary) 60%, var(--accent));
     }
-    .s-title .title-body {
-      flex: 1;
+
+    /* Header */
+    .header {
+      background: var(--panel);
+      border-bottom: 1.5px solid var(--line);
+      padding: 32px 40px 28px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      gap: 20px;
+    }
+    .header img { width: 52px; flex-shrink: 0; }
+    .header-text h1 {
+      margin: 0;
+      font-size: 2em;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .header-text h1 span { color: var(--primary); }
+    .header-text p {
+      margin: 4px 0 0;
+      font-size: 0.85em;
+      color: var(--muted);
+      font-weight: 600;
     }
 
-    /* — Hell-Slide (Standard-Inhaltsfolie) — */
-    .s-light {
-      background: var(--bg) !important;
-      color: var(--ink) !important;
-      display: flex !important;
-      flex-direction: column;
+    /* Main */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 24px 64px;
     }
-    .s-light .slide-header {
-      background: var(--primary);
-      color: #fff;
-      padding: 14px 40px;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 1em;
-      font-weight: 800;
-      flex-shrink: 0;
-      border-bottom: 3px solid var(--primary-d);
-      line-height: 1.2;
+
+    .section-label {
+      font-size: 0.7em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      margin: 0 0 16px;
     }
-    .s-light .body {
-      flex: 1;
-      min-height: 0;
-      padding: 20px 40px 16px;
-      overflow: hidden;
+
+    /* Session Cards */
+    .sessions {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+      margin-bottom: 48px;
     }
 
-    /* — Dunkel-Slide — */
-    .s-dark {
-      background: var(--ink) !important;
-      color: #fff !important;
-      display: flex !important;
-      flex-direction: column;
-    }
-    .s-dark .slide-header {
-      background: var(--accent);
-      color: var(--ink);
-      padding: 14px 40px;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 1em;
-      font-weight: 800;
-      flex-shrink: 0;
-      line-height: 1.2;
-    }
-    .s-dark .body {
-      flex: 1;
-      min-height: 0;
-      padding: 20px 40px 16px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    /* ───────────────────────────────────────────────────────
-       KOMPONENTEN
-    ─────────────────────────────────────────────────────── */
-
-    /* Karte */
-    .card {
+    .session-card {
       background: var(--panel);
       border: 1.5px solid var(--line);
       border-radius: var(--r);
-      padding: 14px 16px;
-    }
-    .card.green  { background: #edf7dc; border-color: #a8d160; }
-    .card.orange { background: #fff3ec; border-color: #f0a060; }
-    .card.accent { background: #fff8f5; border-left: 4px solid var(--accent); border-radius: 0 var(--r) var(--r) 0; }
-    .card-label {
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 0.72em;
-      font-weight: 800;
-      margin-bottom: 6px;
-    }
-    .card-label.green  { color: var(--primary-d); }
-    .card-label.orange { color: #a03500; }
-    .card-label.accent { color: var(--accent); }
-    .card-text { font-size: 0.78em; color: #333; line-height: 1.5; margin: 0; }
-
-    /* Liste */
-    .oz-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
-    .oz-list li {
-      padding: 5px 0 5px 22px;
-      position: relative;
-      font-size: 0.78em;
-      line-height: 1.45;
-    }
-    .oz-list li::before { content: '▸'; position: absolute; left: 0; color: var(--primary); font-size: .9em; }
-    .oz-list.dark li { color: #ddd; }
-    .oz-list.dark li::before { color: var(--accent); }
-
-    /* Partei-Zeile */
-    .party-row {
-      display: flex; align-items: center; gap: 10px;
-      background: var(--panel); border: 1px solid var(--line);
-      border-radius: 8px; padding: 7px 12px; margin-bottom: 5px;
-    }
-    .party-chip {
-      min-width: 52px; text-align: center;
-      padding: 5px 8px; border-radius: 6px;
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-      font-size: 0.6em; font-weight: 800;
-      color: #fff; flex-shrink: 0; line-height: 1;
-    }
-    .party-text { font-size: 0.7em; color: #333; line-height: 1.35; flex: 1; }
-    .badge {
-      display: inline-block; padding: 3px 10px;
-      border-radius: 999px; font-size: 0.58em;
-      font-weight: 800; white-space: nowrap; flex-shrink: 0;
-    }
-    .badge.yes    { background: var(--primary); color: #fff; }
-    .badge.warm   { background: #fff3cd; color: #7a5200; border: 1px solid #f0d060; }
-    .badge.blue   { background: #e8f0ff; color: #2c4caa; border: 1px solid #b0c4f8; }
-
-    /* Grid-Karte */
-    .grid-card {
-      background: var(--panel); border: 1.5px solid var(--line);
-      border-radius: var(--r); overflow: hidden;
-    }
-    .grid-card-stripe { height: 4px; background: var(--primary); }
-    .grid-card-stripe.accent { background: var(--accent); }
-    .grid-card-body { padding: 11px 13px; }
-    .grid-card-title {
-      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: 0.75em;
-      font-weight: 800; color: var(--primary); margin-bottom: 4px;
-    }
-    .grid-card-title.accent { color: var(--accent); }
-    .grid-card-text { font-size: 0.68em; color: #444; line-height: 1.45; }
-
-    /* Tool-Zeile (kompakt, für merged slide) */
-    .tool-row {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-      border-radius: var(--r); padding: 10px 14px;
-    }
-    .tool-row-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1em; flex-shrink: 0;
-    }
-    .tool-row-body { flex: 1; }
-    .tool-row-title { font-size: 0.75em; font-weight: 800; color: #eee; }
-    .tool-row-sub   { font-size: 0.62em; color: #888; margin-top: 1px; }
-    .tool-row-cta   { font-size: 0.62em; color: var(--accent); font-weight: 800; }
-
-    /* Stat-Kreis */
-    .stat-circle {
-      width: 110px; height: 110px;
-      background: var(--primary); border: 3px solid #a8d160;
-      border-radius: 50%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .stat-circle .num { font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: 2.2em; color: #fff; line-height: 1; }
-    .stat-circle .lbl { font-size: 0.5em; color: #c5e890; text-align: center; line-height: 1.2; margin-top: 2px; }
-
-    /* Avatar */
-    .avatar {
-      width: 90px; height: 90px;
-      border-radius: 50%; object-fit: cover;
-      border: 3px solid var(--line);
-    }
-    .avatar-card {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      background: var(--panel); border: 1px solid var(--line);
-      border-radius: var(--r); padding: 12px 10px;
-    }
-    .avatar-name { font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: 0.7em; font-weight: 800; color: var(--ink); text-align: center; }
-
-    /* Offene Frage (dunkel) */
-    .open-q {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: var(--r); padding: 11px 14px; margin-bottom: 7px;
-      display: flex; gap: 12px; align-items: flex-start;
-    }
-    .open-q .icon { font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
-    .open-q .text { font-size: 0.76em; color: #eee; line-height: 1.4; }
-    .open-q .sub  { font-size: 0.63em; color: #777; margin-top: 2px; }
-
-    /* Grid-Helfer — einheitliches gap: 20px, füllen body-Höhe */
-    .g2  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; min-height: 0; }
-    .g3  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-    .g37 { display: grid; grid-template-columns: 3fr 7fr; gap: 20px; align-items: start; flex: 1; min-height: 0; }
-    .g55 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; flex: 1; min-height: 0; }
-    .g46 { display: grid; grid-template-columns: 4fr 6fr; gap: 20px; align-items: start; flex: 1; min-height: 0; }
-
-    /* Typo-Skala (einheitlich) */
-    .t-label { font-size: 0.65em; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
-    .t-label.dark { color: rgba(255,255,255,.45); }
-    .t-caption { font-size: 0.65em; color: var(--muted); font-style: italic; text-align: center; margin: 0; }
-    .t-caption.dark { color: rgba(255,255,255,.4); }
-
-    /* Meme-Box */
-    .meme {
-      border-radius: var(--r); overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: #e8edd8;
-    }
-    .meme img { width: 100%; height: 100%; object-fit: cover; }
-    .meme-inline {
+      overflow: hidden;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: box-shadow 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+    }
+    .session-card:hover {
+      box-shadow: 0 6px 24px rgba(15,19,18,.10);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .session-card.current {
+      border-color: var(--primary);
+      border-width: 2px;
+    }
+
+    .session-stripe {
+      width: 6px;
+      background: var(--line);
+      flex-shrink: 0;
+    }
+    .session-stripe.green { background: var(--primary); }
+    .session-stripe.accent { background: var(--accent); }
+
+    .session-body {
+      padding: 18px 20px;
       flex: 1;
-      min-height: 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
-    .meme-inline img {
-      width: auto;
-      max-width: min(760px, 100%);
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 24px;
-      box-shadow: 0 18px 42px rgba(15,19,18,.18);
-      border: 1px solid rgba(216,211,197,.9);
-      background: #f8f5eb;
+
+    .session-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9em;
+      color: var(--muted);
+      flex-shrink: 0;
     }
-    .meme-inline.compact {
-      margin-top: 0;
-      flex: 0 0 auto;
+    .session-card.current .session-num {
+      background: var(--primary);
+      border-color: var(--primary-d);
+      color: #fff;
     }
-    .meme-inline.compact img {
-      max-width: min(700px, 100%);
-      max-height: 180px;
+
+    .session-info { flex: 1; }
+    .session-title {
+      font-size: 1em;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 0 0 3px;
     }
-    .meme-fallback {
-      font-size: 0.6em; color: var(--muted); font-style: italic;
-      padding: 12px; text-align: center; line-height: 1.4;
+    .session-date {
+      font-size: 0.72em;
+      color: var(--muted);
+      margin: 0 0 6px;
     }
+    .session-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.58em;
+      font-weight: 800;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+    .tag.green { background: #edf7dc; border-color: #a8d160; color: var(--primary-d); }
+    .tag.accent { background: #fff3ec; border-color: #f0a060; color: #a03500; }
+    .tag.blue { background: #f0f5ff; border-color: #b0c4f8; color: #2c4caa; }
+    .tag.current { background: var(--primary); border-color: var(--primary-d); color: #fff; }
+
+    .session-arrow {
+      font-size: 1.1em;
+      color: var(--line);
+      flex-shrink: 0;
+      transition: color 0.15s;
+    }
+    .session-card:hover .session-arrow { color: var(--primary); }
+
+    /* Info-Box */
+    .info-box {
+      background: var(--panel);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r);
+      padding: 18px 22px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .info-box-icon { font-size: 1.3em; flex-shrink: 0; }
+    .info-box-text { font-size: 0.78em; color: var(--muted); line-height: 1.55; }
+    .info-box-text a { color: var(--primary); font-weight: 700; text-decoration: none; }
+    .info-box-text a:hover { text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.65em;
+      color: #aaa;
+      border-top: 1px solid var(--line);
+    }
+    footer a { color: var(--muted); text-decoration: none; }
   </style>
 </head>
 <body>
-<div class="reveal">
-<div class="slides">
 
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 1 — Titel / Cover
-═══════════════════════════════════════════════════════ -->
-<section class="s-title">
-  <div class="topbar"></div>
-  <div class="title-body">
-  <div style="display:flex; align-items:center; gap:48px;">
+<div class="topbar"></div>
 
-    <div style="text-align:center;">
-      <img src="assets/logo.png" style="width:80px; margin-bottom:14px; display:block; margin-left:auto; margin-right:auto;" alt="Logo">
-      <div style="
-        background:#edf7dc; border:1.5px solid #a8d160; border-radius:999px;
-        padding:5px 16px; font-size:0.55em; font-weight:800; letter-spacing:.12em;
-        text-transform:uppercase; color:var(--primary-d); margin-bottom:16px;
-        white-space:nowrap;
-      ">Erster Stammtisch · 11. März 2026</div>
-
-      <h1 style="font-size:2.6em; margin:0 0 8px; line-height:1;">
-        <span style="color:var(--primary);">Open</span>Zirndorf
-      </h1>
-      <p style="font-size:1em; color:var(--muted); margin:0 0 6px; font-weight:700;">
-        Zirndorf digitaler, offener, transparenter.
-      </p>
-      <p style="font-size:0.7em; color:#aaa; margin:0;">
-        Hotel Knorz &nbsp;·&nbsp; 19:30 Uhr
-      </p>
-      <p style="font-size:0.58em; color:#bbb; margin-top:14px; letter-spacing:.05em; font-style:italic;">
-        Tools für Bürgerinnen &amp; Bürger
-      </p>
-    </div>
-
-    <img src="assets/kreiselix.png"
-         style="width:210px; height:210px; object-fit:contain; flex-shrink:0; border-radius:50%; background:rgba(79,143,23,.08); padding:6px;"
-         alt="Kreiselix">
+<header class="header">
+  <img src="assets/logo.png" alt="OpenZirndorf Logo" onerror="this.style.display='none'">
+  <div class="header-text">
+    <h1><span>Open</span>Zirndorf</h1>
+    <p>Stammtisch-Slides — alle Sessionen auf einen Blick</p>
   </div>
-  </div>
-</section>
+</header>
 
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 2 — Warum OpenZirndorf?
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Warum OpenZirndorf?</div>
-  <div class="body">
-    <div class="g55" style="flex:0 0 auto;">
+<main>
 
-      <!-- Links: Gründe -->
-      <div style="display:flex; flex-direction:column; gap:9px;">
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">💸</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Haushalt unter Druck</div>
-            <div style="font-size:0.7em; color:var(--muted);">Die finanzielle Lage wird nicht besser. Kommunen müssen schlanker werden — ohne Qualität zu verlieren.</div>
+  <p class="section-label">Stammtisch-Sessionen</p>
+
+  <div class="sessions">
+
+    <!-- Session 2 — heute (aktuell) -->
+    <a href="stammtisch-2026-03-31.html" class="session-card current">
+      <div class="session-stripe green"></div>
+      <div class="session-body">
+        <div class="session-num">2</div>
+        <div class="session-info">
+          <div class="session-title">Zweiter Stammtisch</div>
+          <div class="session-date">31. März 2026</div>
+          <div class="session-tags">
+            <span class="tag current">Heute</span>
+            <span class="tag green">Reichweite & Zahlen</span>
+            <span class="tag green">Podcast-Erwähnung</span>
+            <span class="tag green">Stadt meldet sich</span>
+            <span class="tag blue">Portal · Wahlanalysen</span>
+            <span class="tag accent">Garagenflohmarkt Tech-Stack</span>
+            <span class="tag">Nächste Schritte</span>
           </div>
         </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">🤝</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Ehrenamtliche IT für bürgernahe Themen</div>
-            <div style="font-size:0.7em; color:var(--muted);">Engagierte Bürger mit IT-Kenntnissen können bei nicht-hoheitlichen Aufgaben helfen. Keine E-Government-Portale — sondern Tools, die Menschen wirklich nutzen.</div>
+        <div class="session-arrow">→</div>
+      </div>
+    </a>
+
+    <!-- Session 1 -->
+    <a href="stammtisch-2026-03-11.html" class="session-card">
+      <div class="session-stripe"></div>
+      <div class="session-body">
+        <div class="session-num">1</div>
+        <div class="session-info">
+          <div class="session-title">Erster Stammtisch</div>
+          <div class="session-date">11. März 2026</div>
+          <div class="session-tags">
+            <span class="tag">Gründung</span>
+            <span class="tag">Warum OpenZirndorf?</span>
+            <span class="tag">Vorstellungsrunde</span>
+            <span class="tag">Projektideen</span>
           </div>
         </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">🏛️</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Gute Erfahrungen aus der Behörde</div>
-            <div style="font-size:0.7em; color:var(--muted);">Zusammenarbeit mit engagierten Bürgern &amp; Studenten funktioniert — das haben wir selbst erlebt.</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">😤</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">„Geht das nicht besser?"</div>
-            <div style="font-size:0.7em; color:var(--muted);">Dinge, die man noch per Telefon oder E-Mail erledigen muss, obwohl das längst besser gehen könnte.</div>
-          </div>
-        </div>
+        <div class="session-arrow">→</div>
       </div>
-
-      <!-- Rechts: Kernaussage -->
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <div class="card accent">
-          <div class="card-label accent">Unser Ansatz</div>
-          <p class="card-text" style="color:var(--muted);">
-            Wir bauen Tools für Bürgerinnen und Bürger.
-          </p>
-        </div>
-        <div class="card green">
-          <div class="card-label green">Das Ziel</div>
-          <p class="card-text">So wird Zirndorf transparenter, digitaler, offener — und das stärkt die Demokratie.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="meme-inline">
-      <img src="assets/meme-this-is-fine.png"
-           onerror="this.style.display='none'"
-           alt="This is fine">
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 3 — Wo stehen wir aktuell?
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Wo stehen wir aktuell?</div>
-  <div class="body">
-
-    <!-- Große Wahlplattform-Karte (zusammengeführt) -->
-    <div class="grid-card" style="margin-bottom:11px;">
-      <div class="grid-card-stripe"></div>
-      <div class="grid-card-body" style="display:flex; align-items:flex-start; gap:20px;">
-        <div style="flex:1;">
-          <div class="grid-card-title" style="font-size:0.85em;">🗳️ Wahlplattform 2026</div>
-          <div class="grid-card-text">wahl2026.openzirndorf.de &nbsp;—&nbsp; KI-Analyse der Wahlprogramme · Livestatistik am Wahlabend · Koalitionsanalyse · Stadtrat-Sitzverteilung mit Mehrheitsrechner</div>
-        </div>
-        <div style="flex-shrink:0; text-align:right;">
-          <div style="font-size:0.62em; color:var(--muted); line-height:1.6;">9 Parteien angeschrieben<br>5 Antworten · 1 informelle Unterstützung</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="g3">
-      <div class="grid-card">
-        <div class="grid-card-stripe"></div>
-        <div class="grid-card-body">
-          <div class="grid-card-title">🐙 GitHub</div>
-          <div class="grid-card-text">Quellcode offen<br>github.com/openzirndorf</div>
-        </div>
-      </div>
-      <div class="grid-card">
-        <div class="grid-card-stripe accent"></div>
-        <div class="grid-card-body">
-          <div class="grid-card-title accent">📣 Social Media</div>
-          <div class="grid-card-text">
-            👍 Facebook &nbsp;&nbsp;<strong>56</strong> Follower · <strong>12.162</strong> Aufrufe · <strong>147</strong> Interaktionen<br>
-            📸 Instagram &nbsp;<strong>36</strong> Follower · <strong>1.693</strong> Aufrufe · <strong>303</strong> Reichweite
-          </div>
-        </div>
-      </div>
-      <div class="grid-card">
-        <div class="grid-card-stripe"></div>
-        <div class="grid-card-body">
-          <div class="grid-card-title">💡 ideen.openzirndorf.de</div>
-          <div class="grid-card-text">Ideen einreichen &amp; diskutieren<br><span style="color:var(--accent); font-weight:700;">Erste Idee: Garagenflohmarkt</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="meme-inline compact">
-      <img src="assets/meme-something.png"
-           onerror="this.style.display='none'"
-           alt="Something meme">
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 4 — Was brauchen wir?
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Was brauchen wir?</div>
-  <div class="body">
-
-    <div style="background:var(--panel); border:2px solid var(--primary); border-radius:var(--r); padding:10px 16px; text-align:center; flex-shrink:0;">
-      <p style="font-weight:800; font-size:0.78em; color:var(--primary-d); margin:0; line-height:1.3;">
-        Code ist nicht das Einzige, was zählt. Es gibt mehr als genug Rollen — auch für alle, die nichts mit IT am Hut haben.
-      </p>
-    </div>
-
-    <div style="display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:10px; align-content:start; flex:1; min-height:0;">
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">💻</div>
-        <div class="card-label green">Entwicklung</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Web, Apps, Automatisierung, jede Sprache willkommen</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">🎨</div>
-        <div class="card-label green">Design &amp; UX</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Damit unsere Tools nicht nur funktionieren, sondern auch Spaß machen</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">✍️</div>
-        <div class="card-label green">Texte &amp; Kommunikation</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Social Media, Pressemitteilungen, verständliche Erklärungen</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">🗺️</div>
-        <div class="card-label green">Lokales Netzwerk</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Kontakte in Verwaltung, Vereinen und Schulen</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">🔍</div>
-        <div class="card-label green">Testen &amp; Feedback</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Einfach ausprobieren und sagen, was nervt</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px;">
-        <div style="font-size:1.05em; margin-bottom:4px;">⏱️</div>
-        <div class="card-label green">Einfach Zeit</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Ab und zu mitdenken, mitreden und mitmachen reicht</p>
-      </div>
-      <div class="card" style="text-align:center; padding:10px 12px; grid-column:1 / -1; max-width:420px; justify-self:center; width:100%;">
-        <div style="font-size:1.05em; margin-bottom:4px;">📋</div>
-        <div class="card-label green">Organisation</div>
-        <p class="card-text" style="font-size:0.6em; line-height:1.3; color:var(--muted);">Treffen planen, Bürger einladen, Veranstaltungen koordinieren</p>
-      </div>
-    </div>
+    </a>
 
   </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 5 — Vorstellungsrunde
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Vorstellungsrunde</div>
-  <div class="body">
-    <div class="g55">
-
-      <!-- Links: Fragen -->
-      <div style="display:flex; flex-direction:column; gap:9px; justify-content:center;">
-        <p class="t-label" style="margin:0 0 6px;">Reihum — ca. 2 Minuten pro Person:</p>
-
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em;">👤</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Wer bin ich?</div>
-            <div style="font-size:0.7em; color:var(--muted);">Name, Bezug zu Zirndorf, was ich beruflich oder technisch mache</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em;">🛠️</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Was bringe ich mit?</div>
-            <div style="font-size:0.7em; color:var(--muted);">Tech · Design · Kommunikation · lokales Netzwerk · einfach Zeit</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em;">🌱</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Warum bin ich hier?</div>
-            <div style="font-size:0.7em; color:var(--muted);">Was hat mich hergebracht — was nervt, was fehlt, was erhoffe ich mir?</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
-          <span style="font-size:1.1em;">🔧</span>
-          <div>
-            <div style="font-weight:800; font-size:0.8em;">Wie möchte ich mich einbringen?</div>
-            <div style="font-size:0.7em; color:var(--muted);">Regelmäßig aktiv, ab und zu, oder erstmal zuhören — alles ist richtig</div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Rechts: Team + Kreiselix -->
-      <div style="display:flex; flex-direction:column; gap:10px;">
-        <p class="t-label" style="margin:0 0 4px;">Schon dabei:</p>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <div class="avatar-card">
-            <img class="avatar" src="assets/fynn.png"
-                 onerror="this.style.display='none'; this.nextSibling.style.display='flex'"
-                 alt="Fynn">
-            <div style="display:none; width:90px; height:90px; border-radius:50%; background:#edf7dc; border:3px solid #a8d160; align-items:center; justify-content:center; font-size:2em;">👤</div>
-            <div class="avatar-name">Fynn</div>
-          </div>
-          <div class="avatar-card">
-            <img class="avatar" src="assets/nico.png"
-                 onerror="this.style.display='none'; this.nextSibling.style.display='flex'"
-                 alt="Nico">
-            <div style="display:none; width:90px; height:90px; border-radius:50%; background:#edf7dc; border:3px solid #a8d160; align-items:center; justify-content:center; font-size:2em;">👤</div>
-            <div class="avatar-name">Nico</div>
-          </div>
-          <div class="avatar-card">
-            <img class="avatar" src="assets/quirin.png"
-                 onerror="this.style.display='none'; this.nextSibling.style.display='flex'"
-                 alt="Quirin">
-            <div style="display:none; width:90px; height:90px; border-radius:50%; background:#edf7dc; border:3px solid #a8d160; align-items:center; justify-content:center; font-size:2em;">👤</div>
-            <div class="avatar-name">Quirin</div>
-          </div>
-          <div class="avatar-card">
-            <img class="avatar" src="assets/tuxi.png"
-                 onerror="this.style.display='none'; this.nextSibling.style.display='flex'"
-                 alt="Tuxi">
-            <div style="display:none; width:90px; height:90px; border-radius:50%; background:#edf7dc; border:3px solid #a8d160; align-items:center; justify-content:center; font-size:2em;">👤</div>
-            <div class="avatar-name">Tuxi</div>
-          </div>
-        </div>
-        <div style="display:flex; align-items:center; gap:10px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r); padding:8px 12px;">
-          <img src="assets/kreiselix.png" style="width:44px; height:44px; border-radius:50%; object-fit:contain;" alt="Kreiselix">
-          <p style="font-size:0.65em; color:var(--muted); margin:0; font-style:italic;">… und wer kommt heute noch dazu?</p>
-        </div>
-      </div>
-
+  <div class="info-box">
+    <div class="info-box-icon">🌐</div>
+    <div class="info-box-text">
+      <strong>OpenZirndorf</strong> — Zirndorf digitaler, offener, transparenter.<br>
+      <a href="https://openzirndorf.de">openzirndorf.de</a> &nbsp;·&nbsp;
+      <a href="https://portal.openzirndorf.de">portal.openzirndorf.de</a> &nbsp;·&nbsp;
+      <a href="https://github.com/openzirndorf">github.com/openzirndorf</a>
     </div>
   </div>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 6 — Was könnte OpenZirndorf sein?
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Was könnte OpenZirndorf sein?</div>
-  <div class="body">
-    <div class="g55" style="gap:14px;">
+</main>
 
-      <!-- Links: Wir sind / Wir sind nicht -->
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <div class="card green" style="padding:12px 14px;">
-          <div class="card-label green">✅ Wir sind …</div>
-          <ul class="oz-list" style="gap:1px;">
-            <li>Engagierte Zirndorfer mit Ideen &amp; Fachkenntnissen</li>
-            <li>Partner der Verwaltung — kein Ersatz, kein Gegner</li>
-            <li>Überparteilich — Stadtleben geht alle an</li>
-            <li>Offen für alle, die Demokratie digital stärken wollen</li>
-            <li>Ehrenamt, das etwas Sichtbares hinterlässt</li>
-          </ul>
-        </div>
-        <div class="card orange" style="padding:12px 14px;">
-          <div class="card-label orange">❌ Wir sind nicht …</div>
-          <ul class="oz-list" style="gap:1px;">
-            <li>keine städtische IT</li>
-            <li>keine bezahlten IT-Consultant</li>
-            <li>fertig, denn wir fangen gerade erst an.</li>
-          </ul>
-        </div>
-        <div class="card" style="background:#f0f7ff; border-color:#b0c8f0; padding:12px 14px;">
-          <div class="card-label" style="color:#2c4caa;">🏛️ Vereinsgründung?</div>
-          <p class="card-text" style="font-size:0.7em; line-height:1.35; color:#333;">brauchen wir eine formale Struktur wie einen Verein? Oder bleiben wir so lange wie möglich locker organisiert? was denkt ihr?</p>
-        </div>
-      </div>
+<footer>
+  <a href="https://openzirndorf.de">OpenZirndorf</a> · Ehrenamtliches Bürger-Projekt für Zirndorf
+</footer>
 
-      <!-- Rechts: Projektfelder -->
-      <div style="display:flex; flex-direction:column; gap:8px; justify-content:center;">
-        <p class="t-label" style="margin:0 0 2px;">Mögliche Projektfelder:</p>
-        <div class="card" style="text-align:center; padding:12px 14px;">
-          <div style="font-size:1.05em; margin-bottom:3px;">🏛️</div>
-          <div class="card-label green">Verwaltung &amp; Politik</div>
-          <p class="card-text" style="font-size:0.66em; line-height:1.35; color:var(--muted);">Offenes Abstimmverhalten sichtbar · visuelle Aufbereitung von Stadtratsentscheidungen · offene Ratsprotokolle</p>
-        </div>
-        <div class="card" style="text-align:center; padding:12px 14px;">
-          <div style="font-size:1.05em; margin-bottom:3px;">📍</div>
-          <div class="card-label green">Alltag in Zirndorf</div>
-          <p class="card-text" style="font-size:0.66em; line-height:1.35; color:var(--muted);">Bürger-App · Veranstaltungskalender · Garagenflohmarkt · Nachbarschaftshilfe</p>
-        </div>
-        <div class="card" style="text-align:center; padding:12px 14px;">
-          <div style="font-size:1.05em; margin-bottom:3px;">🎓</div>
-          <div class="card-label green">Wissen &amp; Bildung</div>
-          <p class="card-text" style="font-size:0.66em; line-height:1.35; color:var(--muted);">Daten verständlich aufbereiten · Schulungen zu Internet &amp; KI · Sensibilisierung für digitale Themen</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     SLIDE 7 — Ideen? Wie machen wir weiter?
-═══════════════════════════════════════════════════════ -->
-<section class="s-light">
-  <div class="slide-header">Ideen? Wie machen wir weiter?</div>
-  <div class="body">
-    <div class="g46">
-
-      <!-- Links: Tools -->
-      <div style="display:flex; flex-direction:column; gap:9px; justify-content:center;">
-        <p class="t-label" style="margin:0 0 4px;">So bleiben wir in Kontakt</p>
-
-        <div class="card" style="display:flex; align-items:center; gap:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:#4A154B; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">💬</div>
-          <div style="flex:1;">
-            <div style="font-size:0.78em; font-weight:800; color:var(--ink);">Slack</div>
-            <div style="font-size:0.65em; color:var(--muted);">Unser digitaler Stammtisch · Kanäle pro Projekt</div>
-            <div style="font-size:0.65em; color:var(--accent); font-weight:800;">→ Heute alle einladen</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:#24292E; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🐙</div>
-          <div style="flex:1;">
-            <div style="font-size:0.78em; font-weight:800; color:var(--ink);">GitHub</div>
-            <div style="font-size:0.65em; color:var(--muted);">Projekte offen · Issues = Aufgaben · auch für Nicht-Devs</div>
-            <div style="font-size:0.65em; color:var(--accent); font-weight:800;">→ github.com/openzirndorf</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; align-items:center; gap:12px;">
-          <div style="width:36px; height:36px; border-radius:8px; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">📅</div>
-          <div style="flex:1;">
-            <div style="font-size:0.78em; font-weight:800; color:var(--ink);">Stammtisch</div>
-            <div style="font-size:0.65em; color:var(--muted);">Locker · keine Tagesordnung · wer kann, kommt</div>
-            <div style="font-size:0.65em; color:var(--accent); font-weight:800;">→ Nächsten Termin heute fixieren</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Rechts: Offene Fragen -->
-      <div style="display:flex; flex-direction:column; gap:8px; justify-content:center;">
-        <p class="t-label" style="margin:0 0 4px;">Heute noch klären</p>
-
-        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">💡</span>
-          <div>
-            <div style="font-size:0.78em; font-weight:800;">Was sind eure Ideen?</div>
-            <div style="font-size:0.65em; color:var(--muted);">Was fehlt in Zirndorf — was würdet ihr morgen anders machen, wenn ihr könntet?</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">🛠️</span>
-          <div>
-            <div style="font-size:0.78em; font-weight:800;">Was ist unser erstes Projekt?</div>
-            <div style="font-size:0.65em; color:var(--muted);">Konkret, machbar, in wenigen Wochen sichtbar</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">📅</span>
-          <div>
-            <div style="font-size:0.78em; font-weight:800;">Wann treffen wir uns wieder?</div>
-            <div style="font-size:0.65em; color:var(--muted);">April? Monatlich? Alle 6 Wochen? — Termin heute festlegen</div>
-          </div>
-        </div>
-        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="font-size:1.1em; flex-shrink:0;">📣</span>
-          <div>
-            <div style="font-size:0.78em; font-weight:800;">Wer kennt noch jemanden?</div>
-            <div style="font-size:0.65em; color:var(--muted);">Namen sammeln — wen laden wir zum nächsten Treffen ein?</div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     CLOSING — Danke
-═══════════════════════════════════════════════════════ -->
-<section class="s-title">
-  <div class="topbar"></div>
-  <div class="title-body">
-  <div style="display:flex; align-items:center; gap:40px;">
-
-    <img src="assets/kreiselix.png"
-         style="width:170px; height:170px; object-fit:contain; flex-shrink:0; border-radius:50%; background:rgba(79,143,23,.08); padding:6px;"
-         alt="Kreiselix">
-
-    <div style="text-align:left;">
-      <p style="font-size:0.75em; color:var(--primary); font-weight:800; margin:0 0 6px; text-transform:uppercase; letter-spacing:.1em;">Danke, dass ihr dabei seid.</p>
-      <h1 style="font-size:2.4em; margin:0 0 8px; line-height:1.1;">
-        Zirndorf,<br>wir fangen an.
-      </h1>
-      <p style="font-size:0.72em; color:var(--muted); margin:0 0 16px; font-style:italic; line-height:1.4;">
-        Was heute Abend hier entsteht, entscheidet,<br>was OpenZirndorf werden kann.
-      </p>
-      <div style="display:flex; gap:20px; align-items:flex-start;">
-        <div>
-          <p style="font-size:0.75em; color:var(--muted); margin:0 0 3px;">
-            🌐 <a href="https://openzirndorf.de" style="color:var(--primary); font-weight:800;">openzirndorf.de</a>
-          </p>
-          <p style="font-size:0.75em; color:var(--muted); margin:0 0 3px;">
-            🗳️ <a href="https://wahl2026.openzirndorf.de" style="color:var(--primary); font-weight:700;">wahl2026.openzirndorf.de</a>
-          </p>
-          <p style="font-size:0.75em; color:var(--muted); margin:0 0 14px;">
-            🐙 <a href="https://github.com/openzirndorf" style="color:var(--muted);">github.com/openzirndorf</a>
-          </p>
-        </div>
-        <!-- QR-Code -->
-        <div style="display:flex; flex-direction:column; align-items:center; gap:5px; flex-shrink:0;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https%3A%2F%2Fopenzirndorf.de&bgcolor=fffdf8&color=0f1312"
-               style="width:110px; height:110px; border-radius:8px; border:2px solid var(--line);"
-               alt="QR-Code openzirndorf.de">
-          <p style="font-size:0.48em; color:#aaa; margin:0; text-align:center;">openzirndorf.de</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  </div>
-</section>
-
-</div><!-- /slides -->
-</div><!-- /reveal -->
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
-<script>
-  Reveal.initialize({
-    hash: true,
-    slideNumber: 'c/t',
-    transition: 'fade',
-    transitionSpeed: 'fast',
-    controls: true,
-    progress: true,
-    center: false,
-    width: 1280,
-    height: 720,
-    margin: 0,
-    plugins: []
-  });
-</script>
 </body>
 </html>

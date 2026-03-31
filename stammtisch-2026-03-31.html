@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenZirndorf — Zweiter Stammtisch · 31. März 2026</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.css">
+
+  <style>
+    :root {
+      --bg:        #f4f3ef;
+      --panel:     #fffdf8;
+      --ink:       #0f1312;
+      --muted:     #4d5a56;
+      --primary:   #4f8f17;
+      --primary-d: #2f5c0e;
+      --accent:    #e1692c;
+      --line:      #d8d3c5;
+      --r:         10px;
+    }
+
+    .reveal {
+      font-family: "Avenir Next", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: "Avenir Next", "Nunito Sans", "Segoe UI", system-ui, sans-serif;
+      font-weight: 800;
+      text-transform: none;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+    }
+    .reveal .slides section {
+      text-align: left;
+      padding: 0;
+      height: 100%;
+    }
+    .reveal .progress  { color: var(--primary); height: 3px; }
+    .reveal .controls  { color: var(--primary); }
+    .reveal .slide-number {
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 0.65em;
+      color: var(--muted);
+    }
+
+    /* — Titel-Slide — */
+    .s-title {
+      background:
+        radial-gradient(ellipse 50% 50% at 5%  95%, rgba(79,143,23,.15) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 95%  5%,  rgba(225,105,44,.10) 0%, transparent 55%),
+        var(--panel) !important;
+      color: var(--ink) !important;
+      display: flex !important;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center !important;
+      overflow: hidden;
+    }
+    .s-title .topbar {
+      height: 5px;
+      flex-shrink: 0;
+      background: linear-gradient(90deg, var(--primary) 60%, var(--accent));
+    }
+    .s-title .title-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* — Hell-Slide — */
+    .s-light {
+      background: var(--bg) !important;
+      color: var(--ink) !important;
+      display: flex !important;
+      flex-direction: column;
+    }
+    .s-light .slide-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 14px 40px;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 1em;
+      font-weight: 800;
+      flex-shrink: 0;
+      border-bottom: 3px solid var(--primary-d);
+      line-height: 1.2;
+    }
+    .s-light .body {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* — Dunkel-Slide — */
+    .s-dark {
+      background: var(--ink) !important;
+      color: #fff !important;
+      display: flex !important;
+      flex-direction: column;
+    }
+    .s-dark .slide-header {
+      background: var(--accent);
+      color: var(--ink);
+      padding: 14px 40px;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 1em;
+      font-weight: 800;
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+    .s-dark .body {
+      flex: 1;
+      min-height: 0;
+      padding: 20px 40px 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Karte */
+    .card {
+      background: var(--panel);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r);
+      padding: 14px 16px;
+    }
+    .card.green  { background: #edf7dc; border-color: #a8d160; }
+    .card.orange { background: #fff3ec; border-color: #f0a060; }
+    .card.accent { background: #fff8f5; border-left: 4px solid var(--accent); border-radius: 0 var(--r) var(--r) 0; }
+    .card.blue   { background: #f0f5ff; border-left: 4px solid #4a7cf5; border-radius: 0 var(--r) var(--r) 0; }
+    .card-label {
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      font-size: 0.72em;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .card-label.green  { color: var(--primary-d); }
+    .card-label.orange { color: #a03500; }
+    .card-label.accent { color: var(--accent); }
+    .card-label.blue   { color: #2c4caa; }
+    .card-text { font-size: 0.78em; color: #333; line-height: 1.5; margin: 0; }
+
+    /* Liste */
+    .oz-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3px; }
+    .oz-list li {
+      padding: 5px 0 5px 22px;
+      position: relative;
+      font-size: 0.78em;
+      line-height: 1.45;
+    }
+    .oz-list li::before { content: '▸'; position: absolute; left: 0; color: var(--primary); font-size: .9em; }
+    .oz-list.dark li { color: #ddd; }
+    .oz-list.dark li::before { color: var(--accent); }
+
+    /* Grid-Karte */
+    .grid-card {
+      background: var(--panel); border: 1.5px solid var(--line);
+      border-radius: var(--r); overflow: hidden;
+    }
+    .grid-card-stripe { height: 4px; background: var(--primary); }
+    .grid-card-stripe.accent { background: var(--accent); }
+    .grid-card-stripe.blue { background: #4a7cf5; }
+    .grid-card-body { padding: 11px 13px; }
+    .grid-card-title {
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif; font-size: 0.75em;
+      font-weight: 800; color: var(--primary); margin-bottom: 4px;
+    }
+    .grid-card-title.accent { color: var(--accent); }
+    .grid-card-title.blue { color: #2c4caa; }
+    .grid-card-text { font-size: 0.68em; color: #444; line-height: 1.45; }
+
+    /* Stat-Zeile */
+    .stat-row {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--panel); border: 1.5px solid var(--line);
+      border-radius: 8px; padding: 7px 12px;
+    }
+    .stat-label { font-size: 0.78em; flex: 1; }
+    .stat-val { font-size: 0.78em; }
+    .stat-delta { font-size: 0.68em; font-weight: 800; min-width: 44px; text-align: right; }
+    .stat-delta.up { color: var(--primary); }
+    .stat-delta.down { color: #c0392b; }
+
+    /* Offene Frage (dunkel) */
+    .open-q {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--r); padding: 11px 14px; margin-bottom: 7px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .open-q .icon { font-size: 1.1em; flex-shrink: 0; margin-top: 1px; }
+    .open-q .text { font-size: 0.76em; color: #eee; line-height: 1.4; }
+    .open-q .sub  { font-size: 0.63em; color: #888; margin-top: 2px; }
+
+    /* Tool-Zeile */
+    .tool-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--r); padding: 10px 14px;
+    }
+    .tool-row-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1em; flex-shrink: 0;
+    }
+    .tool-row-body { flex: 1; }
+    .tool-row-title { font-size: 0.75em; font-weight: 800; color: #eee; }
+    .tool-row-sub   { font-size: 0.62em; color: #888; margin-top: 1px; }
+    .tool-row-cta   { font-size: 0.62em; color: var(--accent); font-weight: 800; }
+
+    /* Grid-Helfer */
+    .g2  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; min-height: 0; }
+    .g3  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .g55 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; flex: 1; min-height: 0; }
+    .g46 { display: grid; grid-template-columns: 4fr 6fr; gap: 20px; align-items: start; flex: 1; min-height: 0; }
+
+    /* Typo */
+    .t-label { font-size: 0.65em; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+    .t-label.dark { color: rgba(255,255,255,.45); }
+
+    /* Agenda-Item */
+    .agenda-item {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--panel); border: 1.5px solid var(--line);
+      border-radius: var(--r); padding: 10px 14px;
+    }
+    .agenda-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72em; font-weight: 800; flex-shrink: 0;
+    }
+    .agenda-text { font-size: 0.78em; font-weight: 700; }
+    .agenda-sub  { font-size: 0.63em; color: var(--muted); margin-top: 2px; }
+
+    /* Highlight-Box */
+    .highlight-box {
+      background: linear-gradient(135deg, #edf7dc 0%, #f4f9ec 100%);
+      border: 2px solid #a8d160;
+      border-radius: var(--r); padding: 12px 16px;
+    }
+
+    /* Nächste-Schritte-Karte */
+    .next-card {
+      background: var(--panel); border: 1.5px solid var(--line);
+      border-radius: var(--r); padding: 12px 14px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .next-card-icon { font-size: 1.1em; flex-shrink: 0; }
+    .next-card-title { font-size: 0.8em; font-weight: 800; }
+    .next-card-sub { font-size: 0.65em; color: var(--muted); line-height: 1.4; margin-top: 2px; }
+    .next-card-link { font-size: 0.63em; color: var(--primary); font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 1 — Titel
+═══════════════════════════════════════════════════════ -->
+<section class="s-title">
+  <div class="topbar"></div>
+  <div class="title-body">
+  <div style="display:flex; align-items:center; gap:48px;">
+
+    <div style="text-align:center;">
+      <img src="assets/logo.png" style="width:80px; margin-bottom:14px; display:block; margin-left:auto; margin-right:auto;" alt="Logo">
+      <div style="
+        background:#edf7dc; border:1.5px solid #a8d160; border-radius:999px;
+        padding:5px 16px; font-size:0.55em; font-weight:800; letter-spacing:.12em;
+        text-transform:uppercase; color:var(--primary-d); margin-bottom:16px;
+        white-space:nowrap;
+      ">Zweiter Stammtisch · 31. März 2026</div>
+
+      <h1 style="font-size:2.6em; margin:0 0 8px; line-height:1;">
+        <span style="color:var(--primary);">Open</span>Zirndorf
+      </h1>
+      <p style="font-size:1em; color:var(--muted); margin:0 0 6px; font-weight:700;">
+        Zirndorf digitaler, offener, transparenter.
+      </p>
+      <p style="font-size:0.7em; color:#aaa; margin:0;">
+        19:30 Uhr
+      </p>
+    </div>
+
+    <img src="assets/kreiselix.png"
+         style="width:210px; height:210px; object-fit:contain; flex-shrink:0; border-radius:50%; background:rgba(79,143,23,.08); padding:6px;"
+         alt="Kreiselix">
+  </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 2 — Agenda
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">Heute Abend</div>
+  <div class="body" style="justify-content:center;">
+    <div style="display:flex; flex-direction:column; gap:10px; max-width:700px; margin:0 auto; width:100%;">
+      <div class="agenda-item">
+        <div class="agenda-num">1</div>
+        <div>
+          <div class="agenda-text">📣 Was ist seit dem letzten Stammtisch passiert?</div>
+          <div class="agenda-sub">Reichweite, Reaktionen, neue Kontakte</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">2</div>
+        <div>
+          <div class="agenda-text">⚙️ Technisches — was wurde gebaut?</div>
+          <div class="agenda-sub">openzirndorf.de · Portal · Wahlanalysen · Garagenflohmarkt-Entwürfe · Mobil</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">3</div>
+        <div>
+          <div class="agenda-text">🗺️ Nächste Schritte &amp; offene Fragen</div>
+          <div class="agenda-sub">Haushaltsübersicht · Flohmarkt-Termin · Short-URL · weitere Ideen</div>
+        </div>
+      </div>
+      <div class="agenda-item">
+        <div class="agenda-num">4</div>
+        <div>
+          <div class="agenda-text">💬 Diskussion &amp; Vorstellungsrunde</div>
+          <div class="agenda-sub">Neue Gesichter willkommen — wer ist neu dabei?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 3 — Reichweite: Zahlen
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">📊 Reichweite — seit dem 1. Stammtisch (11. März)</div>
+  <div class="body">
+    <div class="g55">
+
+      <!-- Facebook -->
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <p class="t-label" style="margin:0 0 4px;">👍 Facebook</p>
+
+        <!-- Follower-Vergleich mit Balken-SVG -->
+        <div class="stat-row" style="background:#edf7dc; border-color:#a8d160;">
+          <span class="stat-label" style="font-weight:800;">Follower</span>
+          <span class="stat-val"><strong>56</strong> → <strong style="color:var(--primary);">134</strong></span>
+          <svg width="60" height="26" viewBox="0 0 60 26" style="flex-shrink:0;">
+            <rect x="2" y="18" width="16" height="6" fill="#d8d3c5" rx="1.5"/>
+            <rect x="24" y="2" width="16" height="22" fill="#4f8f17" rx="1.5"/>
+            <text x="10" y="25" text-anchor="middle" font-size="5.5" fill="#aaa" font-family="sans-serif">56</text>
+            <text x="32" y="25" text-anchor="middle" font-size="5.5" fill="#4f8f17" font-family="sans-serif">134</text>
+          </svg>
+          <span class="stat-delta up">+139%</span>
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-label">Aufrufe (März-Periode)</span>
+          <span class="stat-val"><strong style="color:var(--primary);">27.308</strong></span>
+          <span style="font-size:0.65em; color:var(--muted);">vs. Vormonat</span>
+          <span class="stat-delta up">+249%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Betrachter (März)</span>
+          <span class="stat-val"><strong style="color:var(--primary);">8.080</strong></span>
+          <span class="stat-delta up">+231%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Interaktionen (März)</span>
+          <span class="stat-val"><strong>147</strong> → <strong style="color:var(--primary);">220</strong></span>
+          <svg width="60" height="26" viewBox="0 0 60 26" style="flex-shrink:0;">
+            <rect x="2" y="14" width="16" height="10" fill="#d8d3c5" rx="1.5"/>
+            <rect x="24" y="2" width="16" height="22" fill="#4f8f17" rx="1.5"/>
+            <text x="10" y="25" text-anchor="middle" font-size="5.5" fill="#aaa" font-family="sans-serif">147</text>
+            <text x="32" y="25" text-anchor="middle" font-size="5.5" fill="#4f8f17" font-family="sans-serif">220</text>
+          </svg>
+          <span class="stat-delta up">+50%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Page Views (März)</span>
+          <span class="stat-val"><strong style="color:var(--primary);">1.000</strong></span>
+          <span class="stat-delta up">+75%</span>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <div style="display:flex; flex-direction:column; gap:7px;">
+        <p class="t-label" style="margin:0 0 4px;">📸 Instagram</p>
+
+        <div class="stat-row" style="background:#edf7dc; border-color:#a8d160;">
+          <span class="stat-label" style="font-weight:800;">Follower</span>
+          <span class="stat-val"><strong>36</strong> → <strong style="color:var(--primary);">56</strong></span>
+          <svg width="60" height="26" viewBox="0 0 60 26" style="flex-shrink:0;">
+            <rect x="2" y="16" width="16" height="8" fill="#d8d3c5" rx="1.5"/>
+            <rect x="24" y="2" width="16" height="22" fill="#4f8f17" rx="1.5"/>
+            <text x="10" y="25" text-anchor="middle" font-size="5.5" fill="#aaa" font-family="sans-serif">36</text>
+            <text x="32" y="25" text-anchor="middle" font-size="5.5" fill="#4f8f17" font-family="sans-serif">56</text>
+          </svg>
+          <span class="stat-delta up">+56%</span>
+        </div>
+
+        <div class="stat-row">
+          <span class="stat-label">Aufrufe (März-Periode)</span>
+          <span class="stat-val"><strong>1.693</strong> → <strong style="color:var(--primary);">3.232</strong></span>
+          <svg width="60" height="26" viewBox="0 0 60 26" style="flex-shrink:0;">
+            <rect x="2" y="14" width="16" height="10" fill="#d8d3c5" rx="1.5"/>
+            <rect x="24" y="2" width="16" height="22" fill="#4f8f17" rx="1.5"/>
+            <text x="10" y="25" text-anchor="middle" font-size="5.5" fill="#aaa" font-family="sans-serif">1,7k</text>
+            <text x="32" y="25" text-anchor="middle" font-size="5.5" fill="#4f8f17" font-family="sans-serif">3,2k</text>
+          </svg>
+          <span class="stat-delta up">+91%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Reichweite (März)</span>
+          <span class="stat-val"><strong>303</strong> → <strong style="color:var(--primary);">630</strong></span>
+          <svg width="60" height="26" viewBox="0 0 60 26" style="flex-shrink:0;">
+            <rect x="2" y="15" width="16" height="9" fill="#d8d3c5" rx="1.5"/>
+            <rect x="24" y="2" width="16" height="22" fill="#4f8f17" rx="1.5"/>
+            <text x="10" y="25" text-anchor="middle" font-size="5.5" fill="#aaa" font-family="sans-serif">303</text>
+            <text x="32" y="25" text-anchor="middle" font-size="5.5" fill="#4f8f17" font-family="sans-serif">630</text>
+          </svg>
+          <span class="stat-delta up">+108%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Interaktionen (März)</span>
+          <span class="stat-val"><strong style="color:var(--primary);">82</strong></span>
+          <span class="stat-delta up">+71%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Reichweite Nicht-Follower</span>
+          <span class="stat-val"><strong style="color:var(--primary);">591</strong> <span style="font-size:0.75em; color:var(--muted);">(94%)</span></span>
+          <span class="stat-delta up">+203%</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 4 — Was sonst noch passiert ist
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">📣 Was sonst noch passiert ist</div>
+  <div class="body">
+    <div class="g55">
+
+      <!-- Links -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🎙️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Podcast-Erwähnung</div>
+            <div style="font-size:0.63em; color:var(--muted); line-height:1.4; margin-top:2px;">OpenZirndorf wurde erwähnt — erste externe Wahrnehmung über Zirndorf hinaus.</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#2c4caa; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🏛️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Stadt Zirndorf hat sich gemeldet</div>
+            <div style="font-size:0.63em; color:var(--muted); line-height:1.4; margin-top:2px;">Erste offizielle Kontaktaufnahme — wir sind auf dem Radar der Stadtverwaltung.</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🗳️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Weitere Parteien melden sich</div>
+            <div style="font-size:0.63em; color:var(--muted); line-height:1.4; margin-top:2px;">Mehr Rückmeldungen auf unsere Anfragen — das Gespräch kommt in Fahrt.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rechts -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#e05c00; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">👕</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Spreadshirt-Shop</div>
+            <div style="font-size:0.63em; color:var(--muted); line-height:1.4; margin-top:2px;">Shirts &amp; Co. online bestellbar — OpenZirndorf auch im echten Leben sichtbar.</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#7c3aed; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🏷️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Sticker</div>
+            <div style="font-size:0.63em; color:var(--muted); line-height:1.4; margin-top:2px;">Für Laptops, Fahrräder, Fenster — analoge Präsenz in der Nachbarschaft.</div>
+          </div>
+        </div>
+
+        <div class="card green" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">✅</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800; color:var(--primary-d);">Fazit</div>
+            <div style="font-size:0.63em; color:var(--primary-d); line-height:1.4; margin-top:2px;">Stadt, Parteien, Podcasts, Merch — OpenZirndorf wird wahrgenommen.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 5 — Technisches: Was wurde gebaut?
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">⚙️ Technisches — was haben wir gebaut?</div>
+  <div class="body">
+    <div class="g55">
+
+      <!-- Links: Web-Projekte -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <p class="t-label" style="margin:0 0 2px;">Plattformen &amp; Seiten</p>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:var(--primary); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🌐</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">openzirndorf.de</div>
+            <div style="font-size:0.63em; color:var(--muted);">Hauptseite — Infos, Projekte, Mitmachen</div>
+            <a href="https://openzirndorf.de" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ openzirndorf.de</a>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#2c4caa; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🔗</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">OpenZirndorf Portal</div>
+            <div style="font-size:0.63em; color:var(--muted);">Zentrales Einstiegsportal — Links, Dienste, Tools an einem Ort</div>
+            <a href="https://portal.openzirndorf.de" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ portal.openzirndorf.de</a>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#555; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">📊</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">Wahlanalysen 2026</div>
+            <div style="font-size:0.63em; color:var(--muted);">Interaktive Auswertungen · Koalitionsrechner · Ergebniskarte</div>
+            <a href="https://wahl2026.openzirndorf.de" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ wahl2026.openzirndorf.de</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rechts: Garagenflohmarkt + Infra -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <p class="t-label" style="margin:0 0 2px;">Apps &amp; Infrastruktur</p>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:var(--accent); display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🏠</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">Garagenflohmarkt 2.0</div>
+            <div style="font-size:0.63em; color:var(--muted);">App-Entwurf steht · React + FastAPI · nächste Folie: Aufbau</div>
+            <a href="https://github.com/openzirndorf/garagenflohmarkt2.0" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ github.com/openzirndorf/garagenflohmarkt2.0</a>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#4f46e5; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">☁️</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">Scaleway 🇫🇷 Infrastruktur</div>
+            <div style="font-size:0.63em; color:var(--muted);">Serverless Container · Serverless SQL · Transactional Email · DSGVO-konform</div>
+            <a href="https://console.scaleway.com/billing" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ console.scaleway.com/billing</a>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#24292E; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🐙</div>
+          <div style="flex:1;">
+            <div style="font-size:0.78em; font-weight:800;">GitHub Actions CI/CD</div>
+            <div style="font-size:0.63em; color:var(--muted);">Automatisches Build &amp; Deploy bei jedem Push · vollständig open source</div>
+            <a href="https://github.com/openzirndorf" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ github.com/openzirndorf</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 6 — Garagenflohmarkt: Aufbau
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">🏠 Garagenflohmarkt 2.0 — wie ist das gebaut?</div>
+  <div class="body">
+    <div class="g55">
+
+      <!-- Links: Frontend + Backend -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <p class="t-label" style="margin:0 0 2px;">Anwendung</p>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#0ea5e9; display:flex; align-items:center; justify-content:center; font-size:0.7em; font-weight:800; color:#fff; flex-shrink:0;">FE</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Frontend — React 19 + Vite + Tailwind</div>
+            <div style="font-size:0.63em; color:var(--muted);">TypeScript · React Router v7 · Lucide Icons · statisch gebaut, via Scaleway serviert</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#059669; display:flex; align-items:center; justify-content:center; font-size:0.7em; font-weight:800; color:#fff; flex-shrink:0;">BE</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Backend — Python FastAPI</div>
+            <div style="font-size:0.63em; color:var(--muted);">SQLAlchemy · asyncpg · Pydantic v2 · REST-API · Geocoding</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#6366f1; display:flex; align-items:center; justify-content:center; font-size:0.7em; font-weight:800; color:#fff; flex-shrink:0;">DB</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Datenbank — Scaleway Serverless SQL</div>
+            <div style="font-size:0.63em; color:var(--muted);">Postgres-kompatibel · serverless · kein Datenbankserver zu verwalten · nur Kosten bei Nutzung</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rechts: Infra -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <p class="t-label" style="margin:0 0 2px;">Infrastruktur &amp; Deployment</p>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#4f46e5; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">☁️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Scaleway Serverless Container 🇫🇷</div>
+            <div style="font-size:0.63em; color:var(--muted);">DSGVO-konform · kein Server zu verwalten · skaliert automatisch · nur Kosten wenn aktiv</div>
+            <a href="https://console.scaleway.com/billing" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ console.scaleway.com/billing</a>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#e1692c; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">✉️</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">Scaleway Transactional Email</div>
+            <div style="font-size:0.63em; color:var(--muted);">E-Mail-Versand für Bestätigungen &amp; Benachrichtigungen · direkt aus dem Backend</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:12px; align-items:flex-start;">
+          <div style="width:34px; height:34px; border-radius:8px; background:#24292E; display:flex; align-items:center; justify-content:center; font-size:1em; flex-shrink:0;">🐙</div>
+          <div>
+            <div style="font-size:0.78em; font-weight:800;">GitHub Actions CI/CD</div>
+            <div style="font-size:0.63em; color:var(--muted);">Automatisches Build &amp; Deploy bei jedem Push auf main</div>
+            <a href="https://github.com/openzirndorf/garagenflohmarkt2.0" target="_blank" style="font-size:0.63em; color:var(--primary); font-weight:700; text-decoration:none;">→ github.com/openzirndorf/garagenflohmarkt2.0</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 7 — Nächste Schritte
+═══════════════════════════════════════════════════════ -->
+<section class="s-light">
+  <div class="slide-header">🗺️ Nächste Schritte &amp; offene Fragen</div>
+  <div class="body">
+    <div class="g55">
+
+      <!-- Links: konkrete Projekte -->
+      <div style="display:flex; flex-direction:column; gap:9px;">
+        <p class="t-label" style="margin:0 0 4px;">Auf der Agenda</p>
+
+        <div class="next-card">
+          <div class="next-card-icon">💰</div>
+          <div>
+            <div class="next-card-title">Haushaltsübersicht</div>
+            <div class="next-card-sub">Gemeindefinanzen visualisiert — bereits als Proof of Concept live. Wer will mitmachen? Wie geht es weiter?</div>
+            <div class="next-card-link">→ f-hrtmnn.github.io/hh2025/</div>
+          </div>
+        </div>
+
+        <div class="next-card" style="border-color: #f0a060; background: #fff3ec;">
+          <div class="next-card-icon">🏠</div>
+          <div>
+            <div class="next-card-title">Garagenflohmarkt</div>
+            <div class="next-card-sub">App-Entwurf steht — wann und wo wäre ein erster Termin denkbar?</div>
+            <div class="next-card-link">→ Ideen?</div>
+          </div>
+        </div>
+
+        <div class="next-card">
+          <div class="next-card-icon">🔗</div>
+          <div>
+            <div class="next-card-title">Short-URL-Dienst</div>
+            <div class="next-card-sub">Eigener Kurzlink-Dienst für OpenZirndorf — oz.de/xyz oder ähnlich?</div>
+            <div class="next-card-link">→ Diskussion: lohnt sich das?</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rechts: offene Fragen -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <p class="t-label" style="margin:0 0 4px;">Offene Fragen &amp; Ideen</p>
+
+        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
+          <span style="font-size:1.1em; flex-shrink:0;">💡</span>
+          <div>
+            <div style="font-weight:800; font-size:0.78em;">Was sind eure nächsten Ideen?</div>
+            <div style="font-size:0.65em; color:var(--muted);">Was fehlt in Zirndorf — was würdet ihr als nächstes anpacken?</div>
+          </div>
+        </div>
+
+        <div class="card" style="display:flex; gap:10px; align-items:flex-start;">
+          <span style="font-size:1.1em; flex-shrink:0;">📅</span>
+          <div>
+            <div style="font-weight:800; font-size:0.78em;">Nächster Termin</div>
+            <div style="font-size:0.65em; color:var(--muted);">Wann treffen wir uns das nächste Mal? Heute fixieren.</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CLOSING
+═══════════════════════════════════════════════════════ -->
+<section class="s-title">
+  <div class="topbar"></div>
+  <div class="title-body">
+  <div style="display:flex; align-items:center; gap:40px;">
+
+    <img src="assets/kreiselix.png"
+         style="width:170px; height:170px; object-fit:contain; flex-shrink:0; border-radius:50%; background:rgba(79,143,23,.08); padding:6px;"
+         alt="Kreiselix">
+
+    <div style="text-align:left;">
+      <h1 style="font-size:2.4em; margin:0 0 12px; line-height:1.1;">
+        <span style="color:var(--primary);">Open</span>Zirndorf
+      </h1>
+      <p style="font-size:0.8em; color:var(--muted); margin:0 0 16px; line-height:1.5;">
+        Danke fürs Mitmachen.
+      </p>
+      <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+        <div>
+          <p style="font-size:0.75em; color:var(--muted); margin:0 0 3px;">
+            🌐 <a href="https://openzirndorf.de" style="color:var(--primary); font-weight:800;">openzirndorf.de</a>
+          </p>
+          <p style="font-size:0.75em; color:var(--muted); margin:0 0 3px;">
+            🔗 <a href="https://portal.openzirndorf.de" style="color:var(--primary); font-weight:700;">portal.openzirndorf.de</a>
+          </p>
+          <p style="font-size:0.75em; color:var(--muted); margin:0 0 3px;">
+            🗳️ <a href="https://wahl2026.openzirndorf.de" style="color:var(--muted);">wahl2026.openzirndorf.de</a>
+          </p>
+          <p style="font-size:0.75em; color:var(--muted); margin:0 0 14px;">
+            🐙 <a href="https://github.com/openzirndorf" style="color:var(--muted);">github.com/openzirndorf</a>
+          </p>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:5px; flex-shrink:0;">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https%3A%2F%2Fopenzirndorf.de&bgcolor=fffdf8&color=0f1312"
+               style="width:110px; height:110px; border-radius:8px; border:2px solid var(--line);"
+               alt="QR-Code openzirndorf.de">
+          <p style="font-size:0.48em; color:#aaa; margin:0; text-align:center;">openzirndorf.de</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+</div><!-- /slides -->
+</div><!-- /reveal -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: 'c/t',
+    transition: 'fade',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: false,
+    width: 1280,
+    height: 720,
+    margin: 0,
+    plugins: []
+  });
+</script>
+</body>
+</html>
